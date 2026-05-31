@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Super Mario World",
+    "precio": 300,
+    "portada": "https://via.placeholder.com/250x350"
+  },
+  {
+    "id": 2,
+    "nombre": "Pokemon Emerald",
+    "precio": 500,
+    "portada": "https://via.placeholder.com/250x350"
+  },
+  {
+    "id": 3,
+    "nombre": "The Legend of Zelda",
+    "precio": 800,
+    "portada": "https://via.placeholder.com/250x350"
+  }
+]
