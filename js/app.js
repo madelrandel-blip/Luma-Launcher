@@ -1,5 +1,9 @@
 const contenido = document.getElementById("contenido");
 
+let juegos = [];
+let monedas = 1000;
+let biblioteca = [];
+
 function cargarInicio(){
 
     contenido.innerHTML = `
@@ -41,7 +45,7 @@ cargarInicio();
 async function cargarTienda(){
 
     const respuesta = await fetch("data/juegos.json");
-    const juegos = await respuesta.json();
+    juegos = await respuesta.json();
 
     let html = `
         <h1>Tienda</h1>
@@ -54,7 +58,7 @@ async function cargarTienda(){
         html += `
             <div class="game-card">
 
-                <img src="${juego.portada}">
+                <img src="${obtenerPortada(juego)}">
 
                 <div class="game-info">
 
@@ -80,10 +84,14 @@ async function cargarTienda(){
     contenido.innerHTML = html;
 }
 
-let monedas = 1000;
-
 function canjearJuego(id){
 
     alert("Canjeando juego ID: " + id);
+
+}
+
+function obtenerPortada(juego){
+
+    return `assets/covers/${juego.coverId}.jpg`;
 
 }
