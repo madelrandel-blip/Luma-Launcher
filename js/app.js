@@ -8,6 +8,9 @@ let monedas =
 let biblioteca =
     JSON.parse(localStorage.getItem("biblioteca")) || [];
 
+let nombreUsuario =
+    localStorage.getItem("nombreUsuario") || "Invitado";
+
 async function cargarJuegos(){
 
     if(juegos.length > 0){
@@ -30,6 +33,11 @@ function guardarDatos(){
         "biblioteca",
         JSON.stringify(biblioteca)
     );
+
+    localStorage.setItem(
+         "nombreUsuario",
+        nombreUsuario
+);
 
 }
 
@@ -182,7 +190,19 @@ function cargarPerfil(){
 
         <div class="perfil-card">
 
-            <h1>👤 Invitado</h1>
+            <h1>👤 ${nombreUsuario}</h1>
+
+            <input
+    id="nuevoNombre"
+    type="text"
+    placeholder="Nuevo nombre"
+>
+
+<br><br>
+
+<button onclick="guardarNombre()">
+    Guardar nombre
+</button>
 
             <br>
 
@@ -205,6 +225,28 @@ function cargarPerfil(){
         </div>
 
     `;
+
+}
+
+function guardarNombre(){
+
+    const input =
+        document.getElementById("nuevoNombre");
+
+    const nombre =
+        input.value.trim();
+
+    if(nombre.length < 3){
+
+        alert("El nombre debe tener al menos 3 caracteres.");
+        return;
+    }
+
+    nombreUsuario = nombre;
+
+    guardarDatos();
+
+    cargarPerfil();
 
 }
 
