@@ -65,31 +65,33 @@ async function cargarTienda(){
         <div class="games-grid">
     `;
 
-    juegos.forEach(juego => {
+juegos.forEach(juego => {
 
-        html += `
-            <div class="game-card">
+    html += `
+        <div class="game-card">
 
-                <img src="${obtenerPortada(juego)}">
+            <img src="${obtenerPortada(juego)}">
 
-                <div class="game-info">
+            <div class="game-info">
 
-                    <h3>${juego.nombre}</h3>
+                <h3>${juego.nombre}</h3>
 
-                    <div class="game-price">
-                        ${juego.precio} 🪙
-                    </div>
-
-                    <button onclick="canjearJuego(${juego.id})">
-                        Canjear
-                    </button>
-
+                <div class="game-price">
+                    ${juego.precio} 🪙
                 </div>
 
-            </div>
-        `;
+                ${
+                    biblioteca.includes(juego.id)
+                    ? `<button disabled>Canjeado ✓</button>`
+                    : `<button onclick="canjearJuego(${juego.id})">Canjear</button>`
+                }
 
-    });
+            </div>
+
+        </div>
+    `;
+
+});
 
     html += "</div>";
 
@@ -161,6 +163,8 @@ function canjearJuego(id){
         `${monedas} 🪙`;
 
     alert(`${juego.nombre} agregado a tu biblioteca.`);
+
+    cargarTienda();
 }
 
 function obtenerPortada(juego){
