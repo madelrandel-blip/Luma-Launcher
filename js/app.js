@@ -62,8 +62,13 @@ document.querySelectorAll(".sidebar button")
             case "tienda":
                 cargarTienda();
                 break;
+
             case "biblioteca":
                 cargarBiblioteca();
+                break;
+
+            case "perfil":
+                cargarPerfil();
                 break;
         }
 
@@ -169,6 +174,38 @@ async function cargarBiblioteca(){
     html += "</div>";
 
     contenido.innerHTML = html;
+}
+
+function cargarPerfil(){
+
+    contenido.innerHTML = `
+
+        <div class="perfil-card">
+
+            <h1>👤 Invitado</h1>
+
+            <br>
+
+            <p>
+                Nivel: 1
+            </p>
+
+            <p>
+                XP: 0
+            </p>
+
+            <p>
+                Monedas: ${monedas} 🪙
+            </p>
+
+            <p>
+                Juegos canjeados: ${biblioteca.length}
+            </p>
+
+        </div>
+
+    `;
+
 }
 
 function canjearJuego(id){

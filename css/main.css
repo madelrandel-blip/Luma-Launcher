@@ -112,3 +112,27 @@ body{
     color:black;
     font-weight:bold;
 }
+
+.perfil-card{
+
+    max-width: 500px;
+
+    margin: 20px auto;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    background: #111827;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+}
+
+.perfil-card h1{
+
+    margin-top: 0;
+
+}
