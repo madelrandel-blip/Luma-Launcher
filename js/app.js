@@ -1,8 +1,12 @@
 const contenido = document.getElementById("contenido");
 
 let juegos = [];
-let monedas = 1000;
-let biblioteca = [];
+
+let monedas =
+    Number(localStorage.getItem("monedas")) || 1000;
+
+let biblioteca =
+    JSON.parse(localStorage.getItem("biblioteca")) || [];
 
 async function cargarJuegos(){
 
@@ -12,6 +16,20 @@ async function cargarJuegos(){
 
     const respuesta = await fetch("data/juegos.json");
     juegos = await respuesta.json();
+
+}
+
+function guardarDatos(){
+
+    localStorage.setItem(
+        "monedas",
+        monedas
+    );
+
+    localStorage.setItem(
+        "biblioteca",
+        JSON.stringify(biblioteca)
+    );
 
 }
 
@@ -54,6 +72,9 @@ document.querySelectorAll(".sidebar button")
 });
 
 cargarInicio();
+
+document.getElementById("coins").textContent =
+    `${monedas} 🪙`;
 
 async function cargarTienda(){
 
@@ -104,6 +125,19 @@ async function cargarBiblioteca(){
 
     let juegosBiblioteca =
         juegos.filter(j => biblioteca.includes(j.id));
+
+        if(juegosBiblioteca.length === 0){
+
+    contenido.innerHTML = `
+        <h1>Mi Biblioteca</h1>
+
+        <br>
+
+        <p>No tienes juegos canjeados todavía.</p>
+    `;
+
+    return;
+}
 
     let html = `
         <h1>Mi Biblioteca</h1>
@@ -159,8 +193,11 @@ function canjearJuego(id){
 
     biblioteca.push(id);
 
+    guardarDatos();
+
     document.getElementById("coins").textContent =
         `${monedas} 🪙`;
+
 
     alert(`${juego.nombre} agregado a tu biblioteca.`);
 
